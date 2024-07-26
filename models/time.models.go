@@ -14,18 +14,23 @@ type TimeDisplay struct {
 
 func NewTimeDisplay(d time.Duration) TimeDisplay {
 	return TimeDisplay{
-		Hours: formatNum(d.Hours(), 60),
-		Minutes: formatNum(d.Minutes(), 60),
-		Seconds: formatNum(d.Seconds(), 60),
+		Hours: FormatNum(d.Hours(), 60),
+		Minutes: FormatNum(d.Minutes(), 60),
+		Seconds: FormatNum(d.Seconds(), 60),
 	}
 }
 
-func formatNum(n float64, max int32) string {
+func FormatNum(n float64, max int32) string {
 	if n < 1 {
 		return "00"
 	}
 
 	mod := int(n) % int(max)
 
-	return strconv.Itoa(mod)
+	val := strconv.Itoa(mod)
+	if mod > 9 {
+		return val
+	}
+
+	return "0" + val
 }
