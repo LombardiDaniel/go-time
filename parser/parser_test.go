@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/LombardiDaniel/go-time/cmd/parser"
+	"github.com/LombardiDaniel/go-time/parser"
 )
 
 func TestParseTimeStr(t *testing.T) {

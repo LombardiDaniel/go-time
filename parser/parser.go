@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/LombardiDaniel/go-time/cmd/common"
+	"github.com/LombardiDaniel/go-time/common"
 )
 
 var (

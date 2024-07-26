@@ -4,12 +4,16 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/LombardiDaniel/go-time/cmd/common"
-	"github.com/LombardiDaniel/go-time/cmd/models"
+	"github.com/LombardiDaniel/go-time/common"
+	"github.com/LombardiDaniel/go-time/models"
 	"github.com/common-nighthawk/go-figure"
 )
 
-func ShowTime(d time.Duration) {
+type Opts struct {
+	Font		string
+}
+
+func ShowTime(d time.Duration, font string) {
 	tgtTime := time.Now().Add(d)
 
 	var display models.TimeDisplay
@@ -27,9 +31,8 @@ func ShowTime(d time.Duration) {
 			common.SetColor(common.CONSOLE_TEXT_COLOR_RED)
 		}
 
-
 		str := fmt.Sprintf("%s:%s:%s", display.Hours, display.Minutes, display.Seconds)
-		fig := figure.NewFigure(str, "", false)
+		fig := figure.NewFigure(str, font, false)
 		fig.Print()
 		time.Sleep(100 * time.Millisecond)
 	}

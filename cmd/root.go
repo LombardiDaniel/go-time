@@ -7,24 +7,26 @@ import (
 	"os"
 	"time"
 
-	"github.com/LombardiDaniel/go-time/cmd/parser"
-	"github.com/LombardiDaniel/go-time/cmd/timer"
+	"github.com/LombardiDaniel/go-time/parser"
+	"github.com/LombardiDaniel/go-time/timer"
 	"github.com/spf13/cobra"
+)
+
+var (
+	font string
 )
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "go-time",
-	Short: "A Terminal-Timer written in Go",
-	Long: `A Terminal-Timer to help in anything such as flash talks and more!`,
-	Example: `go-time 15:00 -- inits 15 minute timer`,
+	Use:   "gotime [hh:mm:ss]",
+	Args: cobra.MinimumNArgs(1),
+	Short: "A terminal timer written in Go, it's Go-Time!",
+	Long: `Go-Time is a terminal timer to help in anything such as flash talks and more!`,
+	Example: `gotime 10 > inits 10 second
+gotime 15:00 > inits 15 minute timer
+gotime 01:15:00 > inits 1h15 minute timer
+	`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// min, _ := cmd.Flags().GetInt32("min")
-		// fmt.Printf("min: %v\n", min)
-
-		// sec, _ := cmd.Flags().GetInt32("sec")
-		// fmt.Printf("min: %v\n", sec)
-
 		var duration 	*time.Duration
 		var err 		error
 
@@ -35,10 +37,8 @@ var rootCmd = &cobra.Command{
 				panic(err)
 			}
 		}
-		
-		timer.ShowTime(*duration)
 
-		// common.PrintOnColor("eae\n", common.CONSOLE_TEXT_COLOR_CYAN)
+		timer.ShowTime(*duration, font)
     },
 // 	Long: `A longer description that spans multiple lines and likely contains
 // examples and usage of using your application. For example:
@@ -69,10 +69,11 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
 	// rootCmd.Flags().Int32("min", 0, "minutes")
 	// rootCmd.Flags().Int32("sec", 0, "seconds")
+	rootCmd.Flags().StringVarP(&font, "font", "f", "big", "Set the font, check: http://www.figlet.org/fontdb.cgi")
 }
 
 
