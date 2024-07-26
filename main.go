@@ -1,5 +1,5 @@
 /*
-Copyright © 2024 NAME HERE lombardi.daniel.o@gmail.com
+Copyright © 2024 Daniel Lombardi lombardi.daniel.o@gmail.com
 */
 package main
 

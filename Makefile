@@ -3,6 +3,8 @@ INSTALL_DIR=/usr/local/bin
 
 KERNEL := $(shell uname | awk '{print tolower($0)}')
 
+# BUILD_ARGS=-linkshared
+
 
 ifeq ($(shell uname -m),arm64)
     ARCH := arm64
@@ -14,14 +16,14 @@ tests:
 	go test ./...
 
 build:
-	go build -o dist/${BINARY_NAME}-${KERNEL}-${ARCH} main.go
+	go build ${BUILD_ARGS} -o dist/${BINARY_NAME}-${KERNEL}-${ARCH} main.go
 
 build-all:
-	GOARCH=amd64 GOOS=darwin go build -o dist/${BINARY_NAME}-darwin-amd64 main.go
-	GOARCH=amd64 GOOS=linux go build -o dist/${BINARY_NAME}-linux-amd64 main.go
+	GOARCH=amd64 GOOS=darwin go build ${BUILD_ARGS} -o dist/${BINARY_NAME}-darwin-amd64 main.go
+	GOARCH=amd64 GOOS=linux go build ${BUILD_ARGS} -o dist/${BINARY_NAME}-linux-amd64 main.go
 
-	GOARCH=amd64 GOOS=darwin go build -o dist/${BINARY_NAME}-darwin-amd64 main.go
-	GOARCH=arm64 GOOS=linux go build -o dist/${BINARY_NAME}-linux-arm64 main.go
+	GOARCH=amd64 GOOS=darwin go build ${BUILD_ARGS} -o dist/${BINARY_NAME}-darwin-amd64 main.go
+	GOARCH=arm64 GOOS=linux go build ${BUILD_ARGS} -o dist/${BINARY_NAME}-linux-arm64 main.go
 
 clean:
 	go clean
