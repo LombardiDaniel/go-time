@@ -9,6 +9,8 @@ import (
 	"github.com/common-nighthawk/go-figure"
 )
 
+const sleepBufferMs int = 100
+
 type Opts struct {
 	Font		string
 }
@@ -34,6 +36,6 @@ func ShowTime(d time.Duration, font string) {
 		str := fmt.Sprintf("%s:%s:%s", display.Hours, display.Minutes, display.Seconds)
 		fig := figure.NewFigure(str, font, false)
 		fig.Print()
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(time.Duration(sleepBufferMs) * time.Millisecond)
 	}
 }
