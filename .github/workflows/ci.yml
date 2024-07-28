@@ -22,7 +22,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          target: server
+          # target: server
           push: true
           tags: lombardi/go-time:latest
           platforms: linux/amd64,linux/arm64
