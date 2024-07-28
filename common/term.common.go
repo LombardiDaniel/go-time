@@ -6,10 +6,12 @@ import (
 	"strings"
 )
 
+var xTermSys bool = strings.Contains(os.Getenv("TERM"), "xterm")
+
 func ClearScreen() {
 	var cmd *exec.Cmd
 
-	switch strings.Contains(os.Getenv("TERM"), "xterm") {
+	switch xTermSys {
 	case true:
 		cmd = exec.Command("clear")
 	default:

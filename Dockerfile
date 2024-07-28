@@ -1,40 +1,40 @@
-#### - DEV - ####
-FROM golang:1.22.3 AS dev
+# #### - DEV - ####
+# FROM golang:1.22.3 AS dev
 
-WORKDIR /cmd
+# WORKDIR /cmd
 
-COPY cmd/go.mod go.mod
-COPY cmd/go.sum go.sum
-RUN go mod download
+# COPY cmd/go.mod go.mod
+# COPY cmd/go.sum go.sum
+# RUN go mod download
 
-COPY cmd/ ./
+# COPY cmd/ ./
 
-CMD ["go", "run", "."]
+# CMD ["go", "run", "."]
 
-#### - TESTS - ####
-FROM golang:1.22.3 AS tester
+# #### - TESTS - ####
+# FROM golang:1.22.3 AS tester
 
-WORKDIR /cmd
+# WORKDIR /cmd
 
-COPY cmd/go.mod go.mod
-COPY cmd/go.sum go.sum
-RUN go mod download
+# COPY cmd/go.mod go.mod
+# COPY cmd/go.sum go.sum
+# RUN go mod download
 
-COPY cmd/ ./
+# COPY cmd/ ./
 
-CMD ["go", "test", "-v", "./..."]
+# CMD ["go", "test", "-v", "./..."]
 
 
 #### - BUILDER - ####
 FROM golang:1.22.3 AS builder
 
-WORKDIR /cmd
+WORKDIR /usr
 
-COPY cmd/go.mod go.mod
-COPY cmd/go.sum go.sum
+COPY go.mod go.mod
+COPY go.sum go.sum
 RUN go mod download
 
-COPY cmd/ ./
+COPY . .
 
 RUN go build -o /bin/main main.go
 
@@ -42,9 +42,12 @@ RUN go build -o /bin/main main.go
 #### - SERVER - ####
 FROM alpine:3.19.1 as server
 
-RUN apk add --no-cache gcompat=1.1.0-r4 libstdc++=13.2.1_git20231014-r0
+RUN apk add --no-cache \
+    gcompat=1.1.0-r4 \
+    libstdc++=13.2.1_git20231014-r0
+    # util-linux=2.39.3-r0
 
-WORKDIR /cmd
+WORKDIR /srv
 
 COPY --from=builder /bin/main ./main
 
