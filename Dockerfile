@@ -54,4 +54,6 @@ COPY --from=builder /bin/main ./main
 RUN adduser --system --no-create-home nonroot
 USER nonroot
 
+ENV TERM=xterm
+
 ENTRYPOINT [ "./main" ]
