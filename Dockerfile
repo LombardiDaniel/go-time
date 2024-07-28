@@ -45,7 +45,6 @@ FROM alpine:3.19.1 as server
 RUN apk add --no-cache \
     gcompat=1.1.0-r4 \
     libstdc++=13.2.1_git20231014-r0
-    # util-linux=2.39.3-r0
 
 WORKDIR /srv
 
