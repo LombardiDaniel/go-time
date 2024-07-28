@@ -9,6 +9,8 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -21,9 +23,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          # context: .
-          # file: Dockerfile
-          # target: server
+          context: .
+          file: Dockerfile
+          target: server
           push: true
           tags: lombardi/go-time:latest
           platforms: linux/amd64,linux/arm64
