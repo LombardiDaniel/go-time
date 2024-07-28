@@ -31,6 +31,12 @@ gotime -h
 
 ![](./static/help.png)
 
+```sh
+gotime 01:42
+```
+
+![](./static/01:42.png)
+
 Check out available fonts at http://www.figlet.org/fontdb.cgi
 (checkout font `doh`) !
 
