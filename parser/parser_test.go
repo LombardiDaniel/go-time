@@ -13,16 +13,16 @@ func TestParseTimeStr(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-
 	if *v != 15 * time.Minute {
 		t.Errorf("wrong parse %s", *v)
 	}
+
 	testStr = "01:15:00"
 	v, err = parser.ParseTimeStr(testStr)
 	if err != nil {
 		t.Error(err)
 	}
-	if *v != 15 * time.Minute + 1 * time.Hour {
+	if *v != 1 * time.Hour + 15 * time.Minute {
 		t.Errorf("wrong parse %s", *v)
 	}
 
