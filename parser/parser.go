@@ -80,6 +80,8 @@ func ParseTimeStr(timeStr string) (*time.Duration, error) {
 		return nil, ErrNotParse
 	}
 
-	t := time.Duration(hours) * time.Hour + time.Duration(minutes) * time.Minute + time.Duration(seconds) * time.Second
+	t := time.Duration(hours) * time.Hour +
+		time.Duration(minutes) * time.Minute + 
+		time.Duration(seconds) * time.Second
 	return &t, nil
 }

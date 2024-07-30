@@ -21,10 +21,10 @@ func ShowTime(d time.Duration, font string) {
 	var display models.TimeDisplay
 
 	for tgtTime.After(time.Now()) {
-		common.ClearScreen()
 		remainder := time.Until(tgtTime)
-		display = models.NewTimeDisplay(remainder)
-		
+		display = models.NewTimeDisplay(remainder)		
+		common.ClearScreen()
+
 		switch remainderPart := float64(remainder.Milliseconds()) / float64(d.Milliseconds()); {
 		case remainderPart <= 0.5 && remainderPart > 0.2:
 			common.SetColor(common.CONSOLE_TEXT_COLOR_YELLOW)
